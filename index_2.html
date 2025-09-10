@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hand Piano Blocks – Left-Hand Layout Toggle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style_2.css" />
+
+  <!-- External libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/tone@next/build/Tone.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+<body>
+<header>
+  <h1>Hand Piano Blocks</h1>
+
+  <div class="group">
+    <button id="camBtn" class="btn">🔓 Enable Camera</button>
+    <button id="startBtn" class="btn" disabled>▶️ Start Game</button>
+    <button id="stopBtn" class="btn" disabled>⏹ Stop</button>
+  </div>
+
+  <div class="group">
+    <label><input id="mirror" type="checkbox" checked /> Mirror Video</label>
+    <button id="flipBtn" class="btn">🖐️ Left-hand Layout (Off)</button>
+
+    <label>Fall Duration (beats)
+      <input id="speed" type="range" min="1.0" max="20.0" step="0.1" value="8.0">
+    </label>
+    <label>BPM
+      <input id="tempo" type="range" min="40" max="160" step="1" value="80">
+    </label>
+    <label>Volume
+      <input id="volume" type="range" min="-24" max="0" step="1" value="-6">
+    </label>
+  </div>
+
+  <div class="group">
+    <label>Instrument
+      <select id="instrument">
+        <option value="piano">Piano</option>
+        <option value="violin">Violin</option>
+        <option value="drums">Drums</option>
+        <option value="trumpet">Trumpet</option>
+      </select>
+    </label>
+
+    <label>Song
+      <select id="songSelect"></select>
+    </label>
+
+    <button id="practiceBtn" class="btn activeMode">🎹 Practice Mode</button>
+    <button id="autoplayBtn" class="btn">🎧 Autoplay</button>
+  </div>
+
+  <span id="score">Score: 0 | Combo: 0 | Acc: 0.0%</span>
+  <span id="status"></span>
+</header>
+
+<div id="wrap">
+  <canvas id="cv" width="980" height="620"></canvas>
+
+  <div>
+    <div id="videoBox">
+      <video id="video" playsinline muted></video>
+      <canvas id="output"></canvas>
+    </div>
+    <div class="legend">
+      <div><strong>Finger → Note</strong></div>
+      <span class="pill"><i class="dot c"></i>Thumb → C</span>
+      <span class="pill"><i class="dot d"></i>Index → D</span>
+      <span class="pill"><i class="dot e"></i>Middle → E</span>
+      <span class="pill"><i class="dot f"></i>Ring → F</span>
+      <span class="pill"><i class="dot g"></i>Pinky → G</span>
+    </div>
+  </div>
+</div>
+
+<div id="sheetBox"><div id="musicSheet"></div></div>
+
+<!-- Result Overlay -->
+<div id="resultOverlay">
+  <div id="resultCard">
+    <h2 id="finalTitle">Results</h2>
+    <div id="finalRank">A</div>
+    <div class="sub" id="finalAcc">Accuracy 0.0%</div>
+    <div class="sub" id="finalScore">Score 0 | Max Combo 0</div>
+    <div class="row" id="finalBreakdown"></div>
+    <div class="row">
+      <button id="playAgain" class="btn">🔁 Play Again</button>
+      <button id="closeResults" class="btn">✖ Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Your app logic -->
+<script src="script_2.js"></script>
+</body>
+</html>
