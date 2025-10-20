@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Select Game</title>
+  <style>
+    :root{
+      --bg1:#fff3c4; --bg2:#c7f0ff; --bg3:#e6ffcc;
+      --primary:#845ef7; --secondary:#4dabf7;
+    }
+    html,body{
+      height:100%; margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+      color:#1d2b3a;
+    }
+    body{
+      display:flex; align-items:center; justify-content:center;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, var(--bg2), transparent 60%),
+        radial-gradient(900px 700px at 0% 100%, var(--bg3), transparent 60%),
+        linear-gradient(135deg, var(--bg1), #ffffff 55%);
+    }
+    .wrap{ text-align:center; padding:32px 16px; }
+    h1{ font-size:28px; margin:0 0 20px; font-weight:900; }
+    .btns{ display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
+    a.btn{
+      display:inline-block; text-decoration:none; color:#fff;
+      font-size:22px; font-weight:800; padding:22px 36px;
+      border-radius:18px; box-shadow:0 10px 24px rgba(0,0,0,.18);
+      transition:transform .15s ease, filter .15s ease;
+    }
+    a.btn.purple{ background:linear-gradient(135deg,#b197fc,var(--primary)); }
+    a.btn.blue  { background:linear-gradient(135deg,#74c0fc,var(--secondary)); }
+    a.btn:hover { transform:translateY(-2px); filter:brightness(1.05); }
+    @media (max-width:640px){ a.btn{ width:100%; text-align:center; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="leadline">Learn to play a visual instrument</p>
+    <h1>Please select a game to enter</h1>
+    <div class="btns">
+      <a class="btn purple" href="index_n.html">🖐️🎹 Gesture Piano — Fundamental Level</a>
+      <a class="btn blue"   href="index_n2.html">🖐️🟪 Hand Music Blocks — Advanced Level</a>
+    </div>
+  </div>
+
+  <style>
+    /* Enhanced card-like buttons */
+    .btns {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    a.btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      padding: 32px 48px;
+      border-radius: 24px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      text-align: center;
+      min-width: 240px;
+    }
+
+    a.btn.purple {
+      background: linear-gradient(135deg, #c8b6ff, #8b5cf6);
+    }
+    a.btn.blue {
+      background: linear-gradient(135deg, #74c0fc, #4dabf7);
+    }
+
+    a.btn:hover {
+      transform: translateY(-6px) scale(1.04);
+      filter: brightness(1.07);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    a.btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    @media (max-width: 640px) {
+      a.btn {
+        width: 100%;
+        padding: 24px 0;
+        font-size: 20px;
+        min-width: unset;
+      }
+    }
+
+    /* Cute main title + colorful gradient + drop-in animation */
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap');
+
+    .leadline {
+      font-family: 'Baloo 2', cursive;
+      font-size: 50px;
+      font-weight: 800;
+      text-align: center;
+
+      /* Colorful gradient text */
+      background: linear-gradient(90deg, #ff6ec7, #ffde59, #00ffcc, #5ce1e6, #b26eff, #ff6ec7);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      /* Initial state */
+      opacity: 0;
+      transform: translateY(-40px);
+
+      /* Animations */
+      animation: dropIn 2s ease-out forwards, gradientFlow 8s linear infinite 2s;
+      margin: 0 0 16px;
+    }
+
+    /* Slow drop-in animation */
+    @keyframes dropIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Slowly moving rainbow gradient */
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* A11y: respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .leadline {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        background-position: 50% 50%;
+      }
+    }
+  </style>
+</body>
+</html>
