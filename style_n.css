@@ -1,0 +1,256 @@
+/* Cute Style Palette & Fonts (no need to modify HTML; load fonts via @import) */
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Poppins:wght@400;600&display=swap");
+
+:root{
+  /* Note Colors (Macaron style) */
+  --c: #ffb6c1; /* C Sweet Pink */
+  --d: #a3e4d7; /* D Mint */
+  --e: #add8e6; /* E Light Blue */
+  --f: #d1c4e9; /* F Lavender */
+  --g: #ffcc80; /* G Cream Apricot */
+
+  /* Global Colors */
+  --bg: #fff8fb;        /* Light Pink Background */
+  --panel: #ffffff;     /* White Panel */
+  --text: #4a4a4a;      /* Main Text */
+  --muted: #8b8b8b;     /* Secondary Text */
+  --accent: #ff80ab;    /* Highlight Pink */
+  --line: #ffd6e0;      /* Soft Pink Border */
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(255,192,203,0.25);
+  --shadow-md: 0 6px 14px rgba(255,192,203,0.22);
+  --shadow-soft: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+}
+
+body{
+  margin:0; padding:24px;
+  background: linear-gradient(180deg, #fff8fb 0%, #ffeef6 100%);
+  color: var(--text);
+  font-family: 'Poppins', 'Comic Neue', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
+  line-height: 1.6;
+  letter-spacing: .2px;
+}
+
+/* Title: Cute & Centered */
+h1{
+  margin:0 0 16px;
+  font-weight:700;
+  font-size: 1.9rem;
+  color: var(--accent);
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+}
+
+/* Top Control Bar: Card Style + Wrapping */
+.top-bar{
+  display:flex; align-items:center; justify-content:center;
+  flex-wrap: wrap;
+  gap:18px;
+  margin: 0 auto 22px;
+  padding: 12px 18px;
+  background: var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow: var(--shadow-sm);
+  max-width: 1100px;
+}
+
+/* Control Group: Clearer Spacing */
+.controls{
+  display:flex; align-items:center; flex-wrap: wrap;
+  gap: 14px 18px;
+}
+
+.controls label{
+  display:flex; align-items:center; gap:10px;
+  font-size:14px; color: var(--muted);
+}
+
+/* Slider: Cute Track & Round Thumb */
+.controls input[type="range"]{
+  width: 160px; height: 6px;
+  -webkit-appearance: none; appearance: none;
+  background: #ffe3ec;
+  border-radius: 999px;
+  outline: none;
+  border: 1px solid var(--line);
+}
+.controls input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(#fff 40%, #ffd6e0 41%);
+  border: 1px solid #ffc1d2;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+.controls input[type="range"]::-webkit-slider-thumb:active{
+  transform: scale(1.05);
+}
+
+/* Dropdown: Rounded, Light Shadow, Highlight on Hover */
+.controls select{
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .15s ease;
+  box-shadow: var(--shadow-soft);
+}
+.controls select:hover{
+  filter: brightness(1.02);
+  border-color: var(--accent);
+}
+.controls select:focus{
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,128,171,0.25);
+}
+
+/* Mode Buttons: Jelly Style */
+.mode-controls{
+  display:flex; align-items:center; gap:10px;
+}
+.mode-controls button{
+  background: #fff; color: var(--text);
+  border:1px solid var(--line); border-radius:12px;
+  padding:10px 16px;
+  cursor:pointer; transition: .18s ease;
+  box-shadow: var(--shadow-soft);
+  font-weight: 600;
+}
+.mode-controls button:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(145deg, #fff5fa, #ffffff);
+  box-shadow: var(--shadow-md);
+}
+.mode-controls button.active{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,128,171,0.22);
+}
+
+/* Main Area: Left Video, Right Sheet, Centered Layout */
+.camera-and-sheet{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap:24px; align-items:start;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Canvas Card Style */
+#output{
+  width:100%; height:auto; display:block;
+  background: #000;
+  border:1px solid var(--line); border-radius:16px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Sheet Container: White Background, Rounded, Soft Shadow */
+.sheet-container{
+  background: var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:20px;
+  box-shadow: var(--shadow-soft);
+}
+.sheet-container h2{
+  margin:0 0 12px;
+  font-size:18px;
+  text-align:center;
+  color: var(--accent);
+}
+
+/* Music Sheet: Centered, Even Spacing, Light Animation */
+.music-sheet{
+  display:flex; flex-wrap:wrap; gap:12px;
+  justify-content: center;
+  font-size:22px; line-height:1;
+  margin-top: 6px;
+}
+
+/* Note Pill */
+.note{
+  padding:10px 14px; border-radius:12px;
+  background:#fff8fb; color:var(--text);
+  border:1px solid var(--line); position:relative;
+  transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+  box-shadow: 0 1px 0 #fff inset;
+}
+
+/* Active State: Slight Zoom, Soft Highlight */
+.note.active{
+  background:#ffe6ef;
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px rgba(255,128,171,0.18);
+}
+
+/* Correct/Wrong: Gentle Green/Red Feedback */
+.note.correct{
+  background:#eaf8f0;
+  border-color:#bcebd0;
+  box-shadow: 0 0 0 3px rgba(37,206,95,0.18);
+}
+.note.wrong{
+  background:#ffe9ec;
+  border-color:#ffc3c8;
+  animation: wrong 0.25s ease;
+}
+@keyframes wrong{
+  0%{transform:translateX(0)} 25%{transform:translateX(-3px)} 50%{transform:translateX(3px)} 75%{transform:translateX(-2px)} 100%{transform:translateX(0)}
+}
+
+/* Active Note Glow by Class */
+.note.C.active{ box-shadow: 0 0 14px var(--c), 0 0 0 3px rgba(255,128,171,0.18); }
+.note.D.active{ box-shadow: 0 0 14px var(--d), 0 0 0 3px rgba(255,128,171,0.18); }
+.note.E.active{ box-shadow: 0 0 14px var(--e), 0 0 0 3px rgba(255,128,171,0.18); }
+.note.F.active{ box-shadow: 0 0 14px var(--f), 0 0 0 3px rgba(255,128,171,0.18); }
+.note.G.active{ box-shadow: 0 0 14px var(--g), 0 0 0 3px rgba(255,128,171,0.18); }
+
+/* Legend: Compact, Dots with Macaron Colors */
+.legend{ margin-top:14px; }
+.legend h3{ margin:0 0 8px; font-size:14px; color: var(--muted); text-align:center; }
+.legend ul{ margin:0; padding-left:18px; }
+.legend li{ margin:4px 0; font-size:14px; color: var(--text); }
+.dot{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+.dot-C{ background: var(--c); }
+.dot-D{ background: var(--d); }
+.dot-E{ background: var(--e); }
+.dot-F{ background: var(--f); }
+.dot-G{ background: var(--g); }
+.hint{ color: var(--muted); font-size:12px; margin-top:8px; text-align: center; }
+
+/* Gentle Floating Animation (Subtle, Non-Distracting) */
+.note{
+  animation: float 3s ease-in-out infinite alternate;
+}
+@keyframes float{
+  from{ transform: translateY(0) }
+  to{ transform: translateY(-3px) }
+}
+
+/* Focus Accessibility */
+button:focus, select:focus, .note:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,128,171,0.25);
+}
+
+/* Small Screen Optimization: Stack Vertically, Tighter Spacing */
+@media (max-width: 900px){
+  .camera-and-sheet{ grid-template-columns: 1fr; gap:16px; }
+  .top-bar{ flex-direction: column; gap: 12px; padding: 12px 14px; }
+  .controls{ justify-content: center; }
+  .music-sheet{ font-size: 20px; gap:10px; }
+  h1{ font-size: 1.6rem; }
+}
