@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎵 Hand Music Blocks</title>
+
+  <!-- 🎨 Styles -->
+  <link rel="stylesheet" href="style_n2.css" />
+
+  <!-- 🎶 Audio + Hand Detection Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/tone@next/build/Tone.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+
+<body>  <!-- ✅ The original file was missing <body>, added here -->
+
+  <!-- ✅ New 5-row Control Panel -->
+  <header class="hpb-header">
+    <!-- Row 1: Title -->
+    <div class="row row-title">
+      <h1 class="page-title">🎵 Hand Piano Blocks</h1>
+    </div>
+
+    <!-- Row 2: Buttons -->
+    <div class="row row-actions">
+      <div class="actions-wrap">
+        <button id="camBtn" class="btn">🔓 Enable Camera</button>
+        <button id="startBtn" class="btn" disabled>▶️ Start Game</button>
+        <button id="stopBtn" class="btn" disabled>⏹ Stop</button>
+
+        <label class="cc-check">
+          <input id="mirror" type="checkbox" checked />
+          Mirror Video
+        </label>
+
+        <button id="flipBtn" class="btn">🖐️ Left-hand Layout (Off)</button>
+      </div>
+    </div>
+
+    <!-- Row 3: Slider Controls -->
+    <div class="row row-card">
+      <div class="card">
+        <div class="cc-slider">
+          <label>Fall Duration (beats)</label>
+          <input id="speed" type="range" min="1.0" max="20.0" step="0.1" value="8.0">
+        </div>
+        <div class="cc-slider">
+          <label>BPM</label>
+          <input id="tempo" type="range" min="40" max="160" step="1" value="80">
+        </div>
+        <div class="cc-slider">
+          <label>Volume</label>
+          <input id="volume" type="range" min="-24" max="0" step="1" value="-6">
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 4: Instrument / Song / Mode -->
+    <div class="row row-card">
+      <div class="card">
+        <div class="cc-field">
+          <label>Instrument</label>
+          <select id="instrument">
+            <option value="piano">Piano</option>
+            <option value="guitar">guitar</option>
+            <option value="violin">Violin</option>
+            <option value="trumpet">Trumpet</option>
+          </select>
+        </div>
+
+        <div class="cc-field">
+          <label>Song</label>
+          <select id="songSelect"></select>
+        </div>
+
+        <div class="cc-modes">
+          <button id="practiceBtn" class="btn activeMode">🎹 Practice Mode</button>
+          <button id="autoplayBtn" class="btn">🎧 Autoplay</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 5: Status Display -->
+    <div class="row row-card">
+      <div class="card card-status">
+        <span id="score">Score: 0 | Combo: 0 | Acc: 0.0%</span>
+        <span id="status">Click "Enable Camera" first, then "Start Game".</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🎮 Game Area -->
+  <main id="wrap">
+    <canvas id="cv" width="980" height="620"></canvas>
+
+    <aside>
+      <!-- Camera + Hand Detection Canvas -->
+      <div id="videoBox" class="card">
+        <video id="video" playsinline muted></video>
+        <canvas id="output"></canvas>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend card">
+        <h3>Finger → Note</h3>
+        <span class="pill"><i class="dot c"></i>Thumb → C</span>
+        <span class="pill"><i class="dot d"></i>Index → D</span>
+        <span class="pill"><i class="dot e"></i>Middle → E</span>
+        <span class="pill"><i class="dot f"></i>Ring → F</span>
+        <span class="pill"><i class="dot g"></i>Pinky → G</span>
+      </div>
+    </aside>
+  </main>
+
+  <!-- 🎵 Music Sheet -->
+  <div id="sheetBox" class="card">
+    <div id="musicSheet"></div>
+  </div>
+
+  <!-- 🏁 Result Popup -->
+  <div id="resultOverlay">
+    <div id="resultCard">
+      <h2 id="finalTitle">Results</h2>
+      <div id="finalRank">A</div>
+      <div class="sub" id="finalAcc">Accuracy 0.0%</div>
+      <div class="sub" id="finalScore">Score 0 | Max Combo 0</div>
+      <div class="row" id="finalBreakdown"></div>
+      <div class="row">
+        <button id="playAgain" class="btn">🔁 Play Again</button>
+        <button id="closeResults" class="btn">✖ Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🏠 Back to Home Button (placed at the end of body, overlaying all layers) -->
+  <button id="backHomeBtn" onclick="location.href='homepage.html'">🏠 Back to Home</button>
+
+  <!-- Styles: ultra-high z-index + visual design -->
+  <style>
+    #backHomeBtn{
+      position: fixed !important;
+      top: 14px !important;
+      left: 14px !important;
+      padding: 10px 14px !important;
+      border-radius: 12px !important;
+      border: 2px solid #d0d7e2 !important;
+      background: #ffffff !important;
+      color: #1d2b3a !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+      box-shadow: 0 8px 18px rgba(0,0,0,.15) !important;
+      z-index: 2147483647 !important; /* Max layer level, above overlay/canvas etc. */
+      pointer-events: auto !important;
+    }
+  </style>
+
+  <!-- 🧠 Main Script -->
+  <script src="script_n2.js"></script>
+
+  <!-- 💡 Fullscreen Compatibility Script: attach button to fullscreen element when entering, return to body when exiting -->
+  <script>
+    document.addEventListener('fullscreenchange', () => {
+      const btn = document.getElementById('backHomeBtn');
+      if (!btn) return;
+      const fsEl = document.fullscreenElement;
+      if (fsEl) {
+        fsEl.appendChild(btn);
+      } else {
+        document.body.appendChild(btn);
+      }
+    });
+    // Fallback: ensure the button is a direct child of body to avoid stacking issues caused by transform containers
+    (function ensureOnBody() {
+      const btn = document.getElementById('backHomeBtn');
+      if (btn && btn.parentElement !== document.body) {
+        document.body.appendChild(btn);
+      }
+    })();
+  </script>
+
+</body>
+</html>
