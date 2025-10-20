@@ -1,0 +1,111 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <title>VR Piano Tutor (Hand Gestures)</title>
+ <link rel="stylesheet" href="style_n.css" />
+ <!-- Tone.js for sound -->
+ <script src="https://cdn.jsdelivr.net/npm/tone@next/build/Tone.js"></script>
+ <!-- MediaPipe Hands -->
+ <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+</head>
+<body>
+ <h1>🎵 Learn To Play Instruments with Hand Gestures</h1>
+
+ <div class="top-bar">
+   <div class="controls">
+     <label>Tempo
+       <input type="range" id="tempo" min="60" max="180" value="110" />
+     </label>
+     <label>Volume
+       <input type="range" id="volume" min="-24" max="0" value="-6" />
+     </label>
+     <!-- 🎶 New Instrument Selector -->
+     <label>Instrument
+       <select id="instrument">
+         <option value="piano">🎹 Piano</option>
+         <option value="guitar">🎸 Guitar</option>
+         <option value="violin">🎻 Violin</option>
+         <option value="trumpet">🎺 Trumpet</option>
+       </select>
+     </label>
+   </div>
+
+   <div class="mode-controls">
+     <select id="songSelect"></select>
+     <button id="autoplayBtn">Autoplay</button>
+     <button id="practiceBtn" class="active">Practice Mode</button>
+   </div>
+ </div>
+
+ <div class="camera-and-sheet">
+   <!-- Raw video stays hidden; we draw onto the canvas -->
+   <video id="video" playsinline style="display:none;"></video>
+   <canvas id="output"></canvas>
+
+   <div class="sheet-container">
+     <h2>Music Sheet</h2>
+     <div id="musicSheet" class="music-sheet"></div>
+
+     <div class="legend">
+       <h3>Finger → Note mapping</h3>
+       <ul>
+         <li><span class="dot dot-C"></span> Thumb → C</li>
+         <li><span class="dot dot-D"></span> Index → D</li>
+         <li><span class="dot dot-E"></span> Middle → E</li>
+         <li><span class="dot dot-F"></span> Ring → F</li>
+         <li><span class="dot dot-G"></span> Pinky → G</li>
+       </ul>
+       <p class="hint">Tip: Move a fingertip below your palm to “press” that note.</p>
+     </div>
+   </div>
+ </div>
+
+ <!-- 🏠 Back to Home Button (Fixed at the top-left corner, on top of all layers) -->
+ <button id="backHomeBtn" onclick="location.href='homepage.html'">🏠 Back to Home</button>
+
+ <!-- Override styles: extremely high z-index to avoid being covered by canvas/video/overlay -->
+ <style>
+   #backHomeBtn{
+     position: fixed !important;
+     top: 14px !important;
+     left: 14px !important;
+     padding: 10px 14px !important;
+     border-radius: 12px !important;
+     border: 2px solid #d0d7e2 !important;
+     background: #ffffff !important;
+     color: #1d2b3a !important;
+     font-weight: 800 !important;
+     cursor: pointer !important;
+     box-shadow: 0 8px 18px rgba(0,0,0,.15) !important;
+     z-index: 2147483647 !important;
+     pointer-events: auto !important;
+   }
+ </style>
+
+ <script src="script_n.js"></script>
+
+ <!-- Fullscreen compatibility: attach the button to the fullscreen element when entering fullscreen, and reattach it to body when exiting -->
+ <script>
+   document.addEventListener('fullscreenchange', () => {
+     const btn = document.getElementById('backHomeBtn');
+     if (!btn) return;
+     const fsEl = document.fullscreenElement;
+     if (fsEl) {
+       fsEl.appendChild(btn);
+     } else {
+       document.body.appendChild(btn);
+     }
+   });
+   // Fallback: Ensure the button is a direct child of the body to avoid stacking issues caused by transform/filter containers
+   (function ensureOnBody(){
+     const btn = document.getElementById('backHomeBtn');
+     if (btn && btn.parentElement !== document.body) {
+       document.body.appendChild(btn);
+     }
+   })();
+ </script>
+</body>
+</html>
