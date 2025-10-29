@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎵 Hand Music Blocks</title>
 
-  <!-- 🎨 Styles -->
+  <!-- Styles -->
   <link rel="stylesheet" href="style_n2.css" />
 
-  <!-- 🎶 Audio + Hand Detection Libraries -->
+  <!-- Audio + Hand Detection Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/tone@next/build/Tone.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 </head>
 
-<body>  <!-- ✅ The original file was missing <body>, added here -->
+<body>  
 
-  <!-- ✅ New 5-row Control Panel -->
+  <!-- New 5-row Control Panel -->
   <header class="hpb-header">
     <!-- Row 1: Title -->
     <div class="row row-title">
@@ -92,7 +92,7 @@
     </div>
   </header>
 
-  <!-- 🎮 Game Area -->
+  <!-- Game Area -->
   <main id="wrap">
     <canvas id="cv" width="980" height="620"></canvas>
 
@@ -115,12 +115,12 @@
     </aside>
   </main>
 
-  <!-- 🎵 Music Sheet -->
+  <!-- Music Sheet -->
   <div id="sheetBox" class="card">
     <div id="musicSheet"></div>
   </div>
 
-  <!-- 🏁 Result Popup -->
+  <!-- Result Popup -->
   <div id="resultOverlay">
     <div id="resultCard">
       <h2 id="finalTitle">Results</h2>
@@ -135,7 +135,7 @@
     </div>
   </div>
 
-  <!-- 🏠 Back to Home Button (placed at the end of body, overlaying all layers) -->
+  <!-- Back to Home Button (placed at the end of body, overlaying all layers) -->
   <button id="backHomeBtn" onclick="location.href='index.html'">🏠 Back to Home</button>
 
   <!-- Styles: ultra-high z-index + visual design -->
@@ -157,10 +157,10 @@
     }
   </style>
 
-  <!-- 🧠 Main Script -->
+  <!-- Main Script -->
   <script src="script_n2.js"></script>
 
-  <!-- 💡 Fullscreen Compatibility Script: attach button to fullscreen element when entering, return to body when exiting -->
+  <!-- Fullscreen Compatibility Script: attach button to fullscreen element when entering, return to body when exiting -->
   <script>
     document.addEventListener('fullscreenchange', () => {
       const btn = document.getElementById('backHomeBtn');
